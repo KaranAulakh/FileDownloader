@@ -7,7 +7,7 @@ public class Downloader {
     // will use later for threading
     private boolean isDownloading;
 
-    public Downloader(){
+    public Downloader() {
         this.isDownloading = false;
     }
 
@@ -15,16 +15,20 @@ public class Downloader {
     public void downLoad (String urlToDownload, String downloadPath) throws IOException {
         isDownloading = true;
         URL url = new URL(urlToDownload);
-        try (InputStream inputStream = url.openStream()) {
-            FileOutputStream fileOutputStream = new FileOutputStream(downloadPath);
-            byte[] bytes = new byte[1024];
-            int len;
-            while ((len = inputStream.read(bytes)) != 0){
-                fileOutputStream.write(bytes, 0, len);
-            }
-            fileOutputStream.close();
-            System.out.println("Downloaded: " + downloadPath);
+        InputStream inputStream = url.openStream();
+        FileOutputStream fileOutputStream = new FileOutputStream(downloadPath);
+
+        // Read File and write into given path
+        byte[] bytes = new byte[1024];
+        // Keep track of bytes read to not add any extra bytes during the last read
+        int bytesRead;
+        while ((bytesRead = inputStream.read(bytes)) != -1) {
+            fileOutputStream.write(bytes, 0, bytesRead);
         }
+
+        inputStream.close();
+        fileOutputStream.close();
+        System.out.println("Downloaded: " + downloadPath);
         isDownloading = false;
     }
 }

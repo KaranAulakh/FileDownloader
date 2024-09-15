@@ -1,11 +1,11 @@
 import java.io.IOException;
-import java.net.URL;
+import java.util.concurrent.ExecutorService;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Downloader downloader = new Downloader();
         try {
-            downloader.downLoad("https://www.journaldev.com/sitemap.xml", "/Users/karan.aulakh/Desktop/Karan/Downloader/downloaded_files/test");
+            downloader.downLoad("http://rarerecipes.net/veg_manchurian_recipe.pdf", "/Users/karan.aulakh/Desktop/Karan/Downloader/downloaded_files/test.pdf");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
