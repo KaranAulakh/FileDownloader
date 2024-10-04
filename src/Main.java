@@ -6,18 +6,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Downloader downloader = new Downloader();
-        if (args.length < 2) {
+        if (args.length == 1 && (args[0].equals("recipes") || args[0].equals("guitars"))) {
+            downloadSet(args[0], downloader);
+        } else {
             menu(downloader);
         }
-        else if (args.length != 1 || (!args[0].equals("recipes") && !args[0].equals("guitars"))) {
-            System.out.println("Please enter zero arguments for menu or exactly only one of the following arguments for test run: \"recipes\" or \"guitars\"");
-            return;
-        }
-        else {
-            downloadSet(args[0], downloader);
-        }
-
-
     }
 
     public static void menu(Downloader downloader) {
